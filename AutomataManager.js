@@ -1,6 +1,13 @@
-function AutomataManager(yearLen, gridBuild) {
+function AutomataManager(yearLen, gridBuild, numYrs) {
   this.yearLength = yearLen;
   this.gridBuilder = gridBuild;
+  this.numYears = numYrs;
+
+  var yearCounter = 0;
+  while (yearCounter < numYears) {
+    setTimeout(this.battleLoop(), yearLen);
+    yearCounter++;
+  }
 }​
 
 
@@ -28,11 +35,11 @@ AutomataManager.prototype = {
             var xRand = getRandomIntInRange(0, 1);
             if (xRand == 1) {
               if (x + randCoord > -1 && x + randCoord < gridBuilder.height) {
-                battle(meadowBuilder.Grid[x, y], gridBuilder.grid[x + randCoord, y]));
+                battle(meadowBuilder.grid[x][y], gridBuilder.grid[x + randCoord, y]));
             }
           } else {
             if (y + randCoord > -1 && y + randCoord < gridBuilder.height) {
-              StartCoroutine(battle(meadowBuilder.Grid[x, y], meadowBuilder.grid[x, y + randCoord]));
+              StartCoroutine(battle(meadowBuilder.Grid[x][y], meadowBuilder.grid[x][y + randCoord]));
             }
           }
         }

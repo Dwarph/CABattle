@@ -16,8 +16,8 @@ GridBuilder.prototype = {
     for (int y = 0; y < height; y++) {
       for (int x = 0; x < width; x++) {
         position = createVector(x * scale, y * scale);
-        grid[x, y] = new Tile(pos, automataList[INITIAL_CA].colour, INITIAL_CA);
-        grid[x, y].drawTile();
+        grid[x][y] = new Tile(pos, automataList[INITIAL_CA].colour, INITIAL_CA);
+        grid[x][y].drawTile();
       }
     }
   }
