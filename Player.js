@@ -22,27 +22,27 @@ Player.prototype = {
 
 
     if (keyCode == this.keyDown) {
-      if (this.activeCell.y + 1 < this.gridBuilder.height - 1) {
+      if (this.activeCell.y + 1 <= this.gridBuilder.height - 1) {
         this.drawCursor(0, 1);
       }
     }
 
     if (keyCode == this.keyUp)
-      if (this.activeCell.y - 1 > 0) {
+      if (this.activeCell.y - 1 >= 0) {
         this.drawCursor(0, -1);
       }
 
 
 
     if (keyCode == this.keyLeft) {
-      if (this.activeCell.x - 1 > 0) {
+      if (this.activeCell.x - 1 >= 0) {
         this.drawCursor(-1, 0);
       }
     }
 
 
     if (keyCode == this.keyRight) {
-      if (this.activeCell.x + 1 < this.gridBuilder.width - 1) {
+      if (this.activeCell.x + 1 <= this.gridBuilder.width - 1) {
         this.drawCursor(1, 0);
       }
     }
