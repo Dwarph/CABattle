@@ -23,8 +23,9 @@ GridBuilder.prototype = {
     }
   },
 
+
   clickCheck() {
-    console.log("Clicked!");
+    //    console.log("Clicked!");
     for (var y = 0; y < this.height; y++) {
       for (var x = 0; x < this.width; x++) {
         //if the mouse is inside the Tile and has clicked on it

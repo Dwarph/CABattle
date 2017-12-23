@@ -9,6 +9,8 @@ Tile.prototype = {
   constructor: Tile,
 
   drawTile: function() {
+    strokeWeight(2);
+    stroke(this.colour);
     fill(this.colour);
     rect(this.position.x, this.position.y, this.scale, this.scale)
   },
