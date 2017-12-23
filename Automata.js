@@ -5,4 +5,4 @@ function Automata(s, a, d, col) {
   this.speed = s;
   this.attack = a;
   this.defence = d;
-}​
+}

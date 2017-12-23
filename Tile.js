@@ -1,15 +1,21 @@
-function Tile(pos, col, caNo) {
+function Tile(pos, caNo, scl) {
   this.position = pos;
-  this.colour = col;
   this.caNum = caNo;
+  this.colour = automataList[this.caNum].colour;
+  this.scale = scl;
 }
 
 Tile.prototype = {
-    constructor: Tile,
+  constructor: Tile,
 
-    grid = [],
+  drawTile: function() {
+    fill(this.colour);
+    rect(this.position.x, this.position.y, this.scale, this.scale)
+  },
 
-    drawTile: function() {
-      fill(this.colour);
-      rect(30, 20, 55, 55)
-    },
+  setCA: function(newCA) {
+    this.caNum = newCA;
+    this.colour = automataList[this.caNum].colour;
+    this.drawTile();
+  }
+}
