@@ -2,10 +2,14 @@ function AutomataManager(yearLen, gridBuild, numYrs) {
   this.yearLength = yearLen;
   this.gridBuilder = gridBuild;
   this.numYears = numYrs;
+  this.loopDone = false;
 
   var yearCounter = 0;
-  while (yearCounter < numYears) {
-    setTimeout(this.battleLoop(), yearLen);
+  while (yearCounter < this.numYears) {
+    if (!this.loopDone) {
+      //  setTimeout(this.battleLoop(), yearLen);
+    }
+    //  this.battleLoop();
     yearCounter++;
   }
 }
@@ -18,7 +22,7 @@ AutomataManager.prototype = {
 
   battleLoop: function() {
 
-    for (var y = 0; y < gridBuilder.height; x++) {
+    for (var y = 0; y < gridBuilder.height; y++) {
       for (var x = 0; x < gridBuilder.width; x++) {
         /*
          * Loop through surrounding tiles
@@ -35,28 +39,29 @@ AutomataManager.prototype = {
           var xRand = getRandomIntInRange(0, 1);
           if (xRand == 1) {
             if (x + randCoord > -1 && x + randCoord < gridBuilder.height) {
-              battle(meadowBuilder.grid[x][y], gridBuilder.grid[x + randCoord, y]);
+              this.battle(this.gridBuilder.grid[x][y], this.gridBuilder.grid[x + randCoord][y]);
             }
           } else {
             if (y + randCoord > -1 && y + randCoord < gridBuilder.height) {
-              StartCoroutine(battle(meadowBuilder.Grid[x][y], meadowBuilder.grid[x][y + randCoord]));
+              this.battle(this.gridBuilder.grid[x][y], this.gridBuilder.grid[x][y + randCoord]);
             }
           }
         }
       }
     }
+    this.loopDone = true;
   },
 
   battle: function(attackerTile, defenderTile) {
-    var attacker = automataList[attackerTile.caNum];
-    var defender = automataList[defenderTile.caNum];
+    var attacker = automataList[attackerTile.getCANum()];
+    var defender = automataList[defenderTile.getCANum()];
 
-    var growthRand = getRandomIntInRange(1, 100) + (attacker.speed / 2);
+    var growthRand = getRandomIntInRange(1, 100) + (attacker.getSpeed() / 2);
 
     if (growthRand > 75) {
       var attackRand = getRandomIntInRange(1, 100);
-      if (attacker.attack > defender.defence && attackRand > 20) {
-        defenderObj.caNum = attacker;
+      if (attacker.getAttack() > defender.getDefence() && attackRand > 20) {
+        defenderTile.setCANum(attackerTile.getCANum());
       }
     }
   }

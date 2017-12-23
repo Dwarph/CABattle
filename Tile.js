@@ -13,9 +13,13 @@ Tile.prototype = {
     rect(this.position.x, this.position.y, this.scale, this.scale)
   },
 
-  setCA: function(newCA) {
+  setCANum: function(newCA) {
     this.caNum = newCA;
     this.colour = automataList[this.caNum].colour;
     this.drawTile();
+  },
+
+  getCANum: function() {
+    return this.caNum;
   }
 }
