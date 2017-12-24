@@ -1,7 +1,8 @@
-function GridBuilder(wdth, hght, scl) {
+function GridBuilder(wdth, hght, scl, initialPos) {
   this.width = wdth;
   this.height = hght;
   this.scale = scl;
+  this.initialPosition = initialPos;
   this.grid = [];
 }
 
@@ -15,7 +16,7 @@ GridBuilder.prototype = {
     for (var x = 0; x < this.width; x++) {
       this.grid[x] = [];
       for (var y = 0; y < this.height; y++) {
-        position = createVector(x * this.scale, y * this.scale);
+        position = createVector((x + this.initialPosition.x) * this.scale, (y + this.initialPosition.y) * this.scale);
 
         this.grid[x][y] = new Tile(position, INITIAL_CA, this.scale);
         this.grid[x][y].drawTile();

@@ -7,6 +7,7 @@ function Player(kUp, kDown, kRight, kLeft, kPlace, caN, grdBuilder, cursCol) {
   this.caNum = caN;
   this.gridBuilder = grdBuilder;
   this.cursorColour = cursCol;
+  this.grown = false;
 }
 
 Player.prototype = {
@@ -48,7 +49,16 @@ Player.prototype = {
     }
 
     if (keyCode == this.keyPlace) {
-      this.placeCA();
+      if (!this.grown) {
+        if (this.caNum == 4) {
+          makeCA(grid[1], this.caNum);
+        } else {
+          makeCA(grid[2], this.caNum);
+        }
+        this.grown = true;
+      } else {
+        this.placeCA();
+      }
     }
   },
 
@@ -69,6 +79,22 @@ Player.prototype = {
   },
 
   placeCA: function() {
+    this.updateCA();
     this.gridBuilder.grid[this.activeCell.x][this.activeCell.y].setCANum(this.caNum);
+  },
+
+  updateCA: function() {
+    if (this.caNum == 4) {
+      makeCA(grid[1], this.caNum);
+    } else {
+      makeCA(grid[2], this.caNum);
+    }
+  },
+
+  setActiveGrid: function(newGrid) {
+    this.gridBuilder = newGrid;
+    this.cursorSetup();
   }
+
+
 }

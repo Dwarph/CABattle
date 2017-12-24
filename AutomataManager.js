@@ -22,8 +22,8 @@ AutomataManager.prototype = {
 
   battleLoop: function() {
 
-    for (var y = 0; y < gridBuilder.height; y++) {
-      for (var x = 0; x < gridBuilder.width; x++) {
+    for (var y = 0; y < this.gridBuilder.height; y++) {
+      for (var x = 0; x < this.gridBuilder.width; x++) {
         /*
          * Loop through surrounding tiles
          * Get a random number between 1 & 100
@@ -38,11 +38,11 @@ AutomataManager.prototype = {
         if (randCoord != 0) {
           var xRand = getRandomIntInRange(0, 1);
           if (xRand == 1) {
-            if (x + randCoord > -1 && x + randCoord < gridBuilder.height) {
+            if (x + randCoord > -1 && x + randCoord < this.gridBuilder.height) {
               this.battle(this.gridBuilder.grid[x][y], this.gridBuilder.grid[x + randCoord][y]);
             }
           } else {
-            if (y + randCoord > -1 && y + randCoord < gridBuilder.height) {
+            if (y + randCoord > -1 && y + randCoord < this.gridBuilder.height) {
               this.battle(this.gridBuilder.grid[x][y], this.gridBuilder.grid[x][y + randCoord]);
             }
           }
@@ -59,6 +59,7 @@ AutomataManager.prototype = {
     var growthRand = getRandomIntInRange(1, 100) + (attacker.getSpeed() / 2);
 
     if (growthRand > 75) {
+      //  console.log("ATTACK");
       var attackRand = getRandomIntInRange(1, 100);
       if (attacker.getAttack() > defender.getDefence() && attackRand > 20) {
         defenderTile.setCANum(attackerTile.getCANum());
