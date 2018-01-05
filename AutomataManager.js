@@ -53,6 +53,10 @@ AutomataManager.prototype = {
   },
 
   battle: function(attackerTile, defenderTile) {
+
+    if(attackerTile.getCANum() == defenderTile.getCANum()){
+      return;
+    }
     var attacker = automataList[attackerTile.getCANum()];
     var defender = automataList[defenderTile.getCANum()];
 
