@@ -1,4 +1,10 @@
+// Initialise an empty automataList
 automataList = [];
+
+
+// A Class for an Automata
+// An Automata has a colour, speed, attack and defence
+// So we have getters and setters for each of these
 
 function Automata(s, a, d, col) {
   this.colour = col;
