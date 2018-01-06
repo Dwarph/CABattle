@@ -62,7 +62,7 @@ Player.prototype = {
     //set the cursor thickness
     strokeWeight(2);
 
-    //set the cursor colour (which doesnt seem to work???)
+    //set the cursor colour 
     stroke(this.cursorColour);
 
     //set the rect to no fill, so the cursor is drawn on top of the sqaure below it
@@ -81,11 +81,7 @@ Player.prototype = {
 
   //updates the CA from its correct CAGrower
   updateCA: function() {
-    if (this.caNum == 4) {
-      makeCA(grid[1], this.caNum);
-    } else {
-      makeCA(grid[2], this.caNum);
-    }
+
   },
 
   //Set the cursor's active Grid.

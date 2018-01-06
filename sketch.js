@@ -1,6 +1,7 @@
 var grid = [];
 var automataManagers = [];
 var playerList = [];
+var sliders = [];
 
 //called initially
 function setup() {
@@ -26,12 +27,14 @@ function setup() {
   // automataList[5] = new Automata(10, 11, 9, '#ffe030');
 
   /*
+
    * Define Grids
    * 0: the big ol' grid in the middle. The Battleground
    */
   grid[0] = new GridBuilder(50, 50, 15, createVector(30, 0));
 
 
+  sliders[0] = new Slider(100, 25, '#eaf2ff', '#878fff', '#c3d7f7', '#93bcff', createVector(10, 20));
   //iterate through each grid and generate it, alongside an AutomataManager
   for (var i = 0; i < grid.length; i++) {
     grid[i].generateGrid();
@@ -46,6 +49,11 @@ function setup() {
   //setup the cursors for each player
   for (var i = 0; i < playerList.length; i++) {
     playerList[i].cursorSetup();
+  }
+
+
+  for (var i = 0; i < sliders.length; i++) {
+    sliders[i].drawSlider(false);
   }
 }
 
