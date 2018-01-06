@@ -1,15 +1,17 @@
 //Player Object for holding Player control details and controlling the Player Input
 
-function Player(kUp, kDown, kRight, kLeft, kPlace, caN, grdBuilder, cursCol) {
+function Player(kUp, kDown, kRight, kLeft, kPlace, kSwitch, caN, grdBuilder, cursCol) {
   this.keyUp = kUp;
   this.keyDown = kDown;
   this.keyRight = kRight;
   this.keyLeft = kLeft;
   this.keyPlace = kPlace;
+  this.keySwitch = kSwitch;
   this.caNum = caN;
   this.gridBuilder = grdBuilder;
   this.cursorColour = cursCol;
   this.grown = false;
+  this.state = 0;
   this.activeCell = new createVector(0, 0);
 }
 
@@ -24,55 +26,24 @@ Player.prototype = {
   },
 
   //move the cursor depending on the keypressed
-  playerControls: function(keyCode) {
+  playerKeyPress: function(keyCode) {
 
-    //Move Cursor Down
-    if (keyCode == this.keyDown) {
-      if (this.activeCell.y + 1 <= this.gridBuilder.height - 1) {
-        this.drawCursor(0, 1);
-      }
-    }
-
-    //Move cursor up
-    if (keyCode == this.keyUp)
-      if (this.activeCell.y - 1 >= 0) {
-        this.drawCursor(0, -1);
-      }
-
-    //move cursor left
-    if (keyCode == this.keyLeft) {
-      if (this.activeCell.x - 1 >= 0) {
-        this.drawCursor(-1, 0);
-      }
-    }
-
-    //move cursor right
-    if (keyCode == this.keyRight) {
-      if (this.activeCell.x + 1 <= this.gridBuilder.width - 1) {
-        this.drawCursor(1, 0);
-      }
-    }
-
-    //place a CA
-    if (keyCode == this.keyPlace) {
-
-      //if the CA has not been grown yet, grow it
-      if (!this.grown) {
-
-        // if this is player 1, grow it from from grid 1
-        if (this.caNum == 4) {
-          makeCA(grid[1], this.caNum);
-
-          //otherwise grow it from grid 2
-        } else {
-          makeCA(grid[2], this.caNum);
-        }
-        this.grown = true;
+    if (keyCode == this.keySwitch) {
+      if (this.state == 0) {
+        state = 1;
       } else {
-
-        //if the CA is grown, then place it
-        this.placeCA();
+        state = 0;
       }
+      return;
+    }
+
+    switch (this.state) {
+      case 0:
+        battleStateControlManager(this, keyCode);
+        break;
+      case 1:
+        growStateControlManager(this, keyCode);
+        break;
     }
   },
 
@@ -122,6 +93,4 @@ Player.prototype = {
     this.gridBuilder = newGrid;
     this.cursorSetup();
   }
-
-
 }

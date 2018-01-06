@@ -26,30 +26,22 @@ function setup() {
   // automataList[5] = new Automata(10, 11, 9, '#ffe030');
 
   /*
-   * Define 3 Grids
-   * 0: the big ol' grid in the middle. The Battle background
-   * 1: The left hand CA Grower
-   * 2: The Right Hand CA Grower
+   * Define Grids
+   * 0: the big ol' grid in the middle. The Battleground
    */
   grid[0] = new GridBuilder(50, 50, 15, createVector(30, 0));
-  grid[1] = new GridBuilder(100, 100, 1.5, createVector(100, 100));
-  grid[2] = new GridBuilder(100, 100, 1.5, createVector(900, 100));
 
 
   //iterate through each grid and generate it, alongside an AutomataManager
   for (var i = 0; i < grid.length; i++) {
     grid[i].generateGrid();
     automataManagers[i] = new GridManager(500, grid[i], 100);
-    if (i != 0) {
-      //place the automatas in the CAGrowers
-      gridGrower(grid[i]);
-    }
   }
   //create a player with wasd controls, shift to place and the CA 1 assigned.
-  playerList[0] = new Player(87, 83, 68, 65, 16, 4, grid[0], '42f47d');
+  playerList[0] = new Player(87, 83, 68, 65, 16, 81, 4, grid[0], '#42f47d');
 
   //create a player with arrowkey controls, control to place and the CA 2 assigned.
-  playerList[1] = new Player(38, 40, 39, 37, 17, 5, grid[0], '42f47d');
+  playerList[1] = new Player(38, 40, 39, 37, 17, 229, 5, grid[0], '#42f47d');
 
   //setup the cursors for each player
   for (var i = 0; i < playerList.length; i++) {
@@ -87,7 +79,7 @@ document.addEventListener("keydown", function(event) {
 
   //on keydown, check to see if one of the players has inputted a relavent key
   for (var i = 0; i < playerList.length; i++) {
-    playerList[i].playerControls(event.keyCode);
+    playerList[i].playerKeyPress(event.keyCode);
   }
 
 
